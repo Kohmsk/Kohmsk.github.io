@@ -24,7 +24,7 @@ body {
 
 /* ========================================================= */
 /* 水中インク滴下・拡散・フェードアウトループ                 */
-/* filter:blur を全廃止し、4K端末のGPUバッファ破棄を根絶      */
+/* 4K解像度・高負荷端末対応：多段グラデーションによる滲み表現   */
 /* ========================================================= */
 html::before,
 html::after,
@@ -34,7 +34,6 @@ body::after {
   position: fixed;
   pointer-events: none;
   z-index: -1;
-  /* フィルターは一切使わず、グラデーションの階調のみで滲みを表現 */
   filter: none !important;
   -webkit-filter: none !important;
   -webkit-backface-visibility: hidden;
@@ -43,7 +42,7 @@ body::after {
   opacity: 0.01;
 }
 
-/* 1. 【青インク 1】主役のクリアブルー（多段フェードでソフトに滲む） */
+/* 1. 【青インク 1】主役のクリアブルー */
 html::before {
   width: 760px;
   height: 760px;
@@ -119,7 +118,7 @@ body::after {
   animation: inkDropCycle4 24s cubic-bezier(0.25, 1, 0.5, 1) infinite 18s;
 }
 
-/* アニメーション：GPUによる変形（transform）と不透明度（opacity）のみ */
+/* GPUハードウェア変形アニメーション（メモリ再生成防止） */
 @keyframes inkDropCycle1 {
   0% { transform: translate3d(-30px, -20px, 0) scale(0.15) rotate(0deg); opacity: 0.01; }
   6% { transform: translate3d(-20px, -15px, 0) scale(0.35) rotate(20deg); opacity: 0.95; }
@@ -384,6 +383,7 @@ body::after {
   pointer-events: none;
 }
 
+/* ボタンホバー演出 */
 .cat-btn:hover {
   background: radial-gradient(
     ellipse at 50% 50%,
@@ -403,8 +403,22 @@ body::after {
   transform: scale(0.95);
 }
 
+/* ★ インラインSVGアイコンのスタイル（Phosphor Icons 完全対応） */
 .cat-icon {
-  font-size: 24px;
+  width: 26px;
+  height: 26px;
+  color: #475569; /* 通常時のアイコン線の色（上品なスレートグレー） */
+  display: block;
+  flex-shrink: 0;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* ボタンホバー時：アイコンを鮮やかなブルーに変色させ、わずかに浮かせて発光 */
+.cat-btn:hover .cat-icon {
+  color: #1d4ed8;
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.35));
 }
 
 .cat-label {
@@ -412,6 +426,12 @@ body::after {
   font-weight: 700;
   color: #0f172a;
   text-align: center;
+  transition: color 0.2s ease;
+}
+
+/* ボタンホバー時にテキスト色もブルーに連動 */
+.cat-btn:hover .cat-label {
+  color: #1d4ed8;
 }
 
 /* --- 5. 写真ギャラリー --- */
