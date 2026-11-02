@@ -23,7 +23,8 @@ body {
 }
 
 /* ========================================================= */
-/* 水中インク滴下・拡散・フェードアウトループ (スマホ点滅対策済) */
+/* 水中インク滴下・拡散・フェードアウトループ                 */
+/* filter:blur を全廃止し、4K端末のGPUバッファ破棄を根絶      */
 /* ========================================================= */
 html::before,
 html::after,
@@ -33,91 +34,121 @@ body::after {
   position: fixed;
   pointer-events: none;
   z-index: -1;
-  filter: blur(45px);
-  -webkit-filter: blur(45px);
-  /* 点滅防止：GPUレイヤーを常時固定 */
+  /* フィルターは一切使わず、グラデーションの階調のみで滲みを表現 */
+  filter: none !important;
+  -webkit-filter: none !important;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
   will-change: transform, opacity;
   opacity: 0.01;
 }
 
-/* 1. 【青インク 1】主役のクリアブルー（0秒スタート） */
+/* 1. 【青インク 1】主役のクリアブルー（多段フェードでソフトに滲む） */
 html::before {
-  width: 720px;
-  height: 720px;
-  top: 12%;
-  left: 22%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.45) 0%, rgba(59, 130, 246, 0.22) 50%, transparent 75%);
+  width: 760px;
+  height: 760px;
+  top: 10%;
+  left: 20%;
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.42) 0%,
+    rgba(45, 110, 240, 0.35) 20%,
+    rgba(59, 130, 246, 0.22) 40%,
+    rgba(96, 165, 250, 0.12) 60%,
+    rgba(147, 197, 253, 0.04) 80%,
+    transparent 100%
+  );
   border-radius: 46% 54% 58% 42% / 48% 44% 56% 52%;
   animation: inkDropCycle1 24s cubic-bezier(0.25, 1, 0.5, 1) infinite 0s;
 }
 
-/* 2. 【黄インク】温かみのあるアンバーイエロー（6秒後スタート） */
+/* 2. 【黄インク】温かみのあるアンバーイエロー */
 html::after {
-  width: 640px;
-  height: 640px;
-  top: 16%;
-  right: 14%;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.38) 0%, rgba(251, 191, 36, 0.18) 50%, transparent 75%);
+  width: 680px;
+  height: 680px;
+  top: 15%;
+  right: 12%;
+  background: radial-gradient(
+    circle,
+    rgba(245, 158, 11, 0.35) 0%,
+    rgba(245, 170, 25, 0.28) 20%,
+    rgba(251, 191, 36, 0.18) 40%,
+    rgba(252, 211, 77, 0.09) 60%,
+    rgba(254, 243, 199, 0.03) 80%,
+    transparent 100%
+  );
   border-radius: 54% 46% 40% 60% / 58% 42% 58% 42%;
   animation: inkDropCycle2 24s cubic-bezier(0.25, 1, 0.5, 1) infinite 6s;
 }
 
-/* 3. 【青インク 2】透明感のあるシアンブルー（12秒後スタート） */
+/* 3. 【青インク 2】透明感のあるシアンブルー */
 body::before {
-  width: 680px;
-  height: 680px;
-  top: 38%;
-  right: 18%;
-  background: radial-gradient(circle, rgba(14, 165, 233, 0.42) 0%, rgba(37, 99, 235, 0.20) 50%, transparent 75%);
+  width: 720px;
+  height: 720px;
+  top: 36%;
+  right: 16%;
+  background: radial-gradient(
+    circle,
+    rgba(14, 165, 233, 0.38) 0%,
+    rgba(30, 150, 240, 0.30) 20%,
+    rgba(37, 99, 235, 0.18) 40%,
+    rgba(96, 165, 250, 0.10) 60%,
+    rgba(186, 230, 253, 0.03) 80%,
+    transparent 100%
+  );
   border-radius: 42% 58% 62% 38% / 45% 55% 45% 55%;
   animation: inkDropCycle3 24s cubic-bezier(0.25, 1, 0.5, 1) infinite 12s;
 }
 
-/* 4. 【赤インク】アクセントのローズマゼンタ（18秒後スタート） */
+/* 4. 【赤インク】アクセントのローズマゼンタ */
 body::after {
-  width: 600px;
-  height: 600px;
-  top: 42%;
-  left: 14%;
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.32) 0%, rgba(244, 63, 94, 0.14) 50%, transparent 75%);
+  width: 640px;
+  height: 640px;
+  top: 40%;
+  left: 12%;
+  background: radial-gradient(
+    circle,
+    rgba(239, 68, 68, 0.30) 0%,
+    rgba(240, 75, 90, 0.22) 20%,
+    rgba(244, 63, 94, 0.14) 40%,
+    rgba(251, 113, 133, 0.07) 60%,
+    rgba(255, 228, 230, 0.02) 80%,
+    transparent 100%
+  );
   border-radius: 58% 42% 48% 52% / 52% 48% 52% 48%;
   animation: inkDropCycle4 24s cubic-bezier(0.25, 1, 0.5, 1) infinite 18s;
 }
 
-/* --- アニメーション：opacityを0ではなく0.01に保ちレイヤー破棄を防止 --- */
+/* アニメーション：GPUによる変形（transform）と不透明度（opacity）のみ */
 @keyframes inkDropCycle1 {
   0% { transform: translate3d(-30px, -20px, 0) scale(0.15) rotate(0deg); opacity: 0.01; }
   6% { transform: translate3d(-20px, -15px, 0) scale(0.35) rotate(20deg); opacity: 0.95; }
-  35% { transform: translate3d(20px, 15px, 0) scale(0.92) rotate(90deg); opacity: 0.70; border-radius: 58% 42% 35% 65% / 42% 58% 48% 52%; }
-  65% { transform: translate3d(50px, 45px, 0) scale(1.35) rotate(160deg); opacity: 0.28; border-radius: 38% 62% 54% 46% / 62% 38% 42% 58%; }
+  35% { transform: translate3d(20px, 15px, 0) scale(0.92) rotate(90deg); opacity: 0.65; }
+  65% { transform: translate3d(50px, 45px, 0) scale(1.35) rotate(160deg); opacity: 0.25; }
   85%, 100% { transform: translate3d(75px, 65px, 0) scale(1.65) rotate(220deg); opacity: 0.01; }
 }
 
 @keyframes inkDropCycle2 {
   0% { transform: translate3d(30px, -15px, 0) scale(0.15) rotate(0deg); opacity: 0.01; }
   6% { transform: translate3d(20px, -10px, 0) scale(0.35) rotate(-20deg); opacity: 0.90; }
-  35% { transform: translate3d(-15px, 25px, 0) scale(0.90) rotate(-85deg); opacity: 0.65; border-radius: 40% 60% 65% 35% / 55% 45% 60% 40%; }
-  65% { transform: translate3d(-45px, 50px, 0) scale(1.30) rotate(-150deg); opacity: 0.25; border-radius: 65% 35% 45% 55% / 45% 55% 40% 60%; }
+  35% { transform: translate3d(-15px, 25px, 0) scale(0.90) rotate(-85deg); opacity: 0.60; }
+  65% { transform: translate3d(-45px, 50px, 0) scale(1.30) rotate(-150deg); opacity: 0.22; }
   85%, 100% { transform: translate3d(-65px, 70px, 0) scale(1.60) rotate(-210deg); opacity: 0.01; }
 }
 
 @keyframes inkDropCycle3 {
   0% { transform: translate3d(25px, 30px, 0) scale(0.15) rotate(0deg); opacity: 0.01; }
   6% { transform: translate3d(15px, 20px, 0) scale(0.35) rotate(15deg); opacity: 0.95; }
-  35% { transform: translate3d(-25px, -15px, 0) scale(0.92) rotate(80deg); opacity: 0.68; border-radius: 60% 40% 45% 55% / 50% 60% 40% 50%; }
-  65% { transform: translate3d(-50px, -40px, 0) scale(1.35) rotate(150deg); opacity: 0.28; border-radius: 40% 60% 55% 45% / 55% 45% 55% 45%; }
+  35% { transform: translate3d(-25px, -15px, 0) scale(0.92) rotate(80deg); opacity: 0.65; }
+  65% { transform: translate3d(-50px, -40px, 0) scale(1.35) rotate(150deg); opacity: 0.25; }
   85%, 100% { transform: translate3d(-75px, -60px, 0) scale(1.65) rotate(210deg); opacity: 0.01; }
 }
 
 @keyframes inkDropCycle4 {
   0% { transform: translate3d(-25px, 25px, 0) scale(0.15) rotate(0deg); opacity: 0.01; }
   6% { transform: translate3d(-15px, 15px, 0) scale(0.32) rotate(-15deg); opacity: 0.85; }
-  35% { transform: translate3d(25px, -20px, 0) scale(0.88) rotate(-75deg); opacity: 0.58; border-radius: 45% 55% 60% 40% / 60% 40% 55% 45%; }
-  65% { transform: translate3d(50px, -45px, 0) scale(1.28) rotate(-140deg); opacity: 0.22; border-radius: 55% 45% 38% 62% / 42% 58% 45% 55%; }
+  35% { transform: translate3d(25px, -20px, 0) scale(0.88) rotate(-75deg); opacity: 0.55; }
+  65% { transform: translate3d(50px, -45px, 0) scale(1.28) rotate(-140deg); opacity: 0.20; }
   85%, 100% { transform: translate3d(70px, -65px, 0) scale(1.58) rotate(-200deg); opacity: 0.01; }
 }
 
@@ -325,12 +356,12 @@ body::after {
 .cat-btn {
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.22) 100%
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.28) 100%
   );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 22px;
   padding: 16px 10px;
@@ -356,9 +387,9 @@ body::after {
 .cat-btn:hover {
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.20) 50%,
-    rgba(255, 255, 255, 0.38) 100%
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.45) 100%
   );
   border-color: rgba(255, 255, 255, 0.90);
   transform: translateY(-2px);
@@ -383,7 +414,7 @@ body::after {
   text-align: center;
 }
 
-/* --- 5. 写真ギャラリー（正方形・横3枚並び強制） --- */
+/* --- 5. 写真ギャラリー --- */
 .gallery-card {
   grid-column: span 3;
 }
@@ -441,12 +472,12 @@ body::after {
   padding: 14px 22px;
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.24) 100%
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.30) 100%
   );
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.55);
   border-radius: 9999px;
   color: #0f172a;
@@ -464,9 +495,9 @@ body::after {
 .link-btn:hover {
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.22) 50%,
-    rgba(255, 255, 255, 0.42) 100%
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.45) 100%
   );
   border-color: rgba(255, 255, 255, 0.90);
   transform: translateX(2px);
@@ -789,41 +820,40 @@ body::after {
     padding: 24px 12px;
   }
 
-  /* スマホでの点滅防止：インクサイズとぼかし幅を画面サイズに最適化 */
-  html::before,
-  html::after,
-  body::before,
-  body::after {
-    filter: blur(35px);
-    -webkit-filter: blur(35px);
-  }
-
   html::before {
-    width: 420px;
-    height: 420px;
-    top: 10%;
-    left: 5%;
+    width: 380px;
+    height: 380px;
+    top: 8%;
+    left: 4%;
   }
 
   html::after {
-    width: 380px;
-    height: 380px;
-    top: 20%;
-    right: 5%;
+    width: 340px;
+    height: 340px;
+    top: 18%;
+    right: 4%;
   }
 
   body::before {
-    width: 400px;
-    height: 400px;
-    top: 45%;
-    right: 5%;
+    width: 360px;
+    height: 360px;
+    top: 42%;
+    right: 4%;
   }
 
   body::after {
-    width: 360px;
-    height: 360px;
-    top: 50%;
-    left: 5%;
+    width: 320px;
+    height: 320px;
+    top: 48%;
+    left: 4%;
+  }
+
+  /* スマホでの二重レンダリング負荷を排除 */
+  .cat-btn,
+  .link-btn,
+  .part-item {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
   .bento-container {
