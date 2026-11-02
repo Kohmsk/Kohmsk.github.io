@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kōh | Portfolio & Setup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="bento-container">
+
+    <!-- 1. プロフィールカード (全幅) -->
+    <header class="card profile-card">
+      <div class="avatar-wrap">
+        <img src="images/koh.jpg" alt="Avatar" class="avatar">
+      </div>
+      <div class="profile-info">
+        <h1 class="name">Kōh</h1>
+        <p class="role">Engineer / Creator</p>
+        <p class="bio">制作物・愛用しているデバイス・Photo</p>
+      </div>
+    </header>
+
+    <!-- 2. YouTubeカード (2列分) -->
+    <section class="card youtube-card">
+      <div class="card-header">
+        <span class="badge">YouTube</span>
+        <span class="card-subtitle">Latest Video</span>
+      </div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/AcR6Q9_Nv94" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <!-- 3. ステータスカード (1列分) -->
+    <section class="card status-card">
+      <div class="card-header">
+        <span class="badge">Status</span>
+      </div>
+      <div class="status-content">
+        <div class="pulse-indicator">
+          <span class="pulse-dot"></span>
+          <span class="status-text">Active Setup</span>
+        </div>
+        <p class="status-detail">デスクセットアップ・制作物・Photoを日々アップデートします。各ボタンから詳細を確認できます。</p>
+      </div>
+    </section>
+
+    <!-- 4. Gear カテゴリボタン一覧カード (全幅) -->
+    <section class="card categories-card">
+      <div class="card-header">
+        <span class="badge">Desk Setup & Gear</span>
+        <span class="card-subtitle">ボタンをタップして一覧を表示</span>
+      </div>
+      
+      <div class="category-buttons-grid">
+        <button type="button" class="cat-btn" data-target="modal-pc">
+          <span class="cat-icon">🖥️</span>
+          <span class="cat-label">PC</span>
+        </button>
+        <button type="button" class="cat-btn" data-target="modal-monitor">
+          <span class="cat-icon">🖥</span>
+          <span class="cat-label">Monitor</span>
+        </button>
+        <button type="button" class="cat-btn" data-target="modal-input">
+          <span class="cat-icon">⌨️</span>
+          <span class="cat-label">Input Devices</span>
+        </button>
+        <button type="button" class="cat-btn" data-target="modal-audio">
+          <span class="cat-icon">🎧</span>
+          <span class="cat-label">Audio</span>
+        </button>
+        <button type="button" class="cat-btn" data-target="modal-desk">
+          <span class="cat-icon">🪴</span>
+          <span class="cat-label">Desk Accessory</span>
+        </button>
+        <button type="button" class="cat-btn" data-target="modal-chair">
+          <span class="cat-icon">🪑</span>
+          <span class="cat-label">Chair</span>
+        </button>
+        <button type="button" class="cat-btn" data-target="modal-wishlist">
+          <span class="cat-icon">✨</span>
+          <span class="cat-label">Wish List</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. 日常の写真ギャラリー (全幅) -->
+    <section class="card gallery-card">
+      <div class="card-header">
+        <span class="badge">Moments</span>
+        <span class="card-subtitle">Daily Photography</span>
+      </div>
+      <div class="gallery-grid">
+        <div class="photo-item">
+          <img src="images/photo1.jpg" alt="Moment 1">
+        </div>
+        <div class="photo-item">
+          <img src="images/photo2.jpg" alt="Moment 2">
+        </div>
+        <div class="photo-item">
+          <img src="images/photo3.jpg" alt="Moment 3">
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 各種リンクカード (X と YouTube のみ) -->
+    <section class="card links-card">
+      <div class="card-header">
+        <span class="badge">Links</span>
+        <span class="card-subtitle">Social & Channel</span>
+      </div>
+      <div class="links-list">
+        <a href="https://x.com/Koh_msk_" class="link-btn" target="_blank" rel="noopener noreferrer">
+          <span class="link-name">X (Twitter)</span>
+          <span class="link-arrow">↗</span>
+        </a>
+        <a href="https://www.youtube.com/@K%C3%B6h_msk" class="link-btn" target="_blank" rel="noopener noreferrer">
+          <span class="link-name">YouTube Channel</span>
+          <span class="link-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Kōh. All rights reserved.</p>
+  </footer>
+  
+  
+  <!-- ========================================================= -->
+  <!-- 写真拡大用ライトボックス                                   -->
+  <!-- ========================================================= -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button type="button" class="lightbox-close" aria-label="閉じる">&times;</button>
+    <img src="" alt="Enlarged Photo" class="lightbox-img" id="lightbox-img">
+  </div>
+
+
+  <!-- ========================================================= -->
+  <!-- 3D Touch風 ポップアップモーダル群                         -->
+  <!-- ========================================================= -->
+
+  <!-- 1. PC Components -->
+  <div class="pop-overlay" id="modal-pc">
+    <div class="pop-modal">
+      <div class="pop-header">
+        <div>
+          <span class="badge">Specifications</span>
+          <h2 class="pop-title">PC Components</h2>
+        </div>
+        <button type="button" class="pop-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="parts-grid">
+        <a href="https://www.microsoft.com/ja-jp/d/windows-11-home/dg7gmgf0krt0/000P" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/os.jpg" alt="OS"></div>
+          <div class="part-info">
+            <span class="part-cat">OS</span>
+            <h3 class="part-name">Microsoft Windows 11 Home</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.amd.com/ja/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9700x.html" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/cpu.jpg" alt="CPU"></div>
+          <div class="part-info">
+            <span class="part-cat">CPU</span>
+            <h3 class="part-name">AMD Ryzen™ 7 9700X</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.asrock.com/Graphics-Card/AMD/Radeon%20RX%209070%20XT%20Steel%20Legend%20Dark%2016GB/index.jp.asp" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/gpu.jpg" alt="GPU"></div>
+          <div class="part-info">
+            <span class="part-cat">GPU</span>
+            <h3 class="part-name">ASRock AMD Radeon™ RX 9070 XT Steel Legend Dark 16GB</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.asrock.com/mb/AMD/B850%20LiveMixer%20WiFi/index.jp.asp" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/mb.jpg" alt="Motherboard"></div>
+          <div class="part-info">
+            <span class="part-cat">Motherboard</span>
+            <h3 class="part-name">ASRock B850 LiveMixer WiFi</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.arctic.de/en/Liquid-Freezer-III-360/ACFRE00136A" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/cooler.jpg" alt="CPU Cooler"></div>
+          <div class="part-info">
+            <span class="part-cat">CPU Cooler</span>
+            <h3 class="part-name">ARCTIC Liquid Freezer III 360</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.crucial.jp/memory/ddr5/cp2k16g64c38u5b" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/ram.jpg" alt="RAM"></div>
+          <div class="part-info">
+            <span class="part-cat">Memory</span>
+            <h3 class="part-name">Crucial Pro DDR5-6400 CL38 32GB Kit (16GBx2)</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.crucial.jp/ssd/t500/ct1000t500ssd8" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/ssd.jpg" alt="SSD"></div>
+          <div class="part-info">
+            <span class="part-cat">Storage</span>
+            <h3 class="part-name">Crucial T500 1TB PCIe Gen4 NVMe M.2 SSD</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.asrock.com/Power-Supply/SteelLegend/SL-850G" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/psu.jpg" alt="Power Supply"></div>
+          <div class="part-info">
+            <span class="part-cat">Power Supply</span>
+            <h3 class="part-name">ASRock Steel Legend SL-850G</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://nzxt.com/ja-intl/products/h6-flow?srsltid=AfmBOooohraILwhOMgzSBOi7dihyLgjZ7aaLTQbTZ5-QYJ6TgQB7Hd9_" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/case.jpg" alt="Case"></div>
+          <div class="part-info">
+            <span class="part-cat">PC Case</span>
+            <h3 class="part-name">NZXT H6 Flow</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.asiahorse.com.cn/products/nyota-120mm-case-fans-3-pack" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/fan120.jpg" alt="Case Fan 120mm"></div>
+          <div class="part-info">
+            <span class="part-cat">Case Fan</span>
+            <h3 class="part-name">ASIA HORSE NYOTA 120mm (3-Pack & Reverse x1)</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.asiahorse.com.cn/products/nyota-mega-a14-140mm-pc-case-fan-1pack?variant=51017575858489" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/fan140.jpg" alt="Case Fan 140mm"></div>
+          <div class="part-info">
+            <span class="part-cat">Case Fan</span>
+            <h3 class="part-name">ASIA HORSE Nyota Mega 140mm Reverse x2</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://ja.aliexpress.com/item/1005009878908843.html?spm=a2g0o.order_list.order_list_main.4.4d21585aYhmH9m&gatewayAdapt=glo2jpn" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/nic.jpg" alt="10GbE NIC"></div>
+          <div class="part-info">
+            <span class="part-cat">Network</span>
+            <h3 class="part-name">Realtek RTL8127 10GbE PCIe LAN Card</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Monitor -->
+  <div class="pop-overlay" id="modal-monitor">
+    <div class="pop-modal">
+      <div class="pop-header">
+        <div>
+          <span class="badge">Display</span>
+          <h2 class="pop-title">Monitors</h2>
+        </div>
+        <button type="button" class="pop-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="parts-grid">
+        <a href="https://www.amazon.co.jp/Amzfast-%E3%82%B2%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%BC-%E6%9B%B2%E9%9D%A2%E3%82%A6%E3%83%AB%E3%83%88%E3%83%A9%E3%83%AF%E3%82%A4%E3%83%89-3440x1440-130-sRGB/dp/B0DZ6LG8PZ?ref_=ast_sto_dp&th=1&psc=1" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/monitor_main.jpg" alt="Main Display"></div>
+          <div class="part-info">
+            <span class="part-cat">Main Display</span>
+            <h3 class="part-name">34" 1500R Curved (240Hz)</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.lg.com/jp/monitors/gaming-monitors/27gx700a-b/?srsltid=AfmBOopUMDI8Vs8VPf6Qs-6c6rK10Xw3WzmCdutnqnoJA45bYbz1GAfF" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/monitor_sub.jpg" alt="Sub Display"></div>
+          <div class="part-info">
+            <span class="part-cat">Sub Display</span>
+            <h3 class="part-name">27" IPS Monitor</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Input Devices -->
+  <div class="pop-overlay" id="modal-input">
+    <div class="pop-modal">
+      <div class="pop-header">
+        <div>
+          <span class="badge">Peripherals</span>
+          <h2 class="pop-title">Input Devices</h2>
+        </div>
+        <button type="button" class="pop-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="parts-grid">
+        <a href="https://arbiterstudio.com/products/akitsu-carbon-fiber-8k-wireless-gaming-mouse?srsltid=AfmBOorPtvNtIu0nTfYzAqEchpLPEch36WBtGSXxm7yKEN_ZLFtjo8f2" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/akitsu.jpg" alt="Arbiter Studio AKITSU"></div>
+          <div class="part-info">
+            <span class="part-cat">Gaming Mouse</span>
+            <h3 class="part-name">Arbiter Studio AKITSU 38g Carbon Fiber 8K</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.logicool.co.jp/ja-jp/products/mice/mx-master-3s.html" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/mxmaster3s.jpg" alt="MX Master 3S"></div>
+          <div class="part-info">
+            <span class="part-cat">Productivity Mouse</span>
+            <h3 class="part-name">MX Master 3S</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.scythe.co.jp/category/product/gaming-accessories/gamepad/vader4pro/" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/vader4pro.jpg" alt="Flydigi VADER4 PRO"></div>
+          <div class="part-info">
+            <span class="part-cat">Gamepad</span>
+            <h3 class="part-name">Flydigi VADER4 PRO</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://shop.yushakobo.jp/products/8962?srsltid=AfmBOooecJfEOGZAxz7IjK_pkFSk3DC3m5rC2mNEDRjdiV-9vaziF_eV" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/cornev4.jpg" alt="Corne V4 Chocolate"></div>
+          <div class="part-info">
+            <span class="part-cat">Split Keyboard</span>
+            <h3 class="part-name">Corne V4 Chocolate</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://keychron.co.jp/products/keychron-q9-qmk-custom-mechanical-keyboard-us-ansi-layout?variant=42804347011243" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/keychron_q9.jpg" alt="Keychron Q9 Plus"></div>
+          <div class="part-info">
+            <span class="part-cat">Keyboard</span>
+            <h3 class="part-name">Keychron Q9 Plus Shell White</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://www.audio-technica.co.jp/product/AT2020?srsltid=AfmBOorF3bDwxBEfV4_JbTplFlyZC2Vbq7LdfShaOdEAYg1tkF8nlxS8" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/at2020.jpg" alt="audio-technica AT2020"></div>
+          <div class="part-info">
+            <span class="part-cat">Microphone</span>
+            <h3 class="part-name">audio-technica AT2020</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Audio -->
+  <div class="pop-overlay" id="modal-audio">
+    <div class="pop-modal">
+      <div class="pop-header">
+        <div>
+          <span class="badge">Acoustics</span>
+          <h2 class="pop-title">Audio Gear</h2>
+        </div>
+        <button type="button" class="pop-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="parts-grid">
+        <a href="https://jp.technics.com/products/tz700/" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/tz700.jpg" alt="Technics EAH-TZ700"></div>
+          <div class="part-info">
+            <span class="part-cat">Earphones</span>
+            <h3 class="part-name">Technics EAH-TZ700</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://final-inc.com/products/e3000-jp?srsltid=AfmBOopRuyohYTnnYa0GuJCm-yGprsnRaEzu_ay1GmAOebSH2a-FBl_V" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/e3000.jpg" alt="final E3000"></div>
+          <div class="part-info">
+            <span class="part-cat">Earphones</span>
+            <h3 class="part-name">final E3000</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://mezeaudio.jp/rai-penta/" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/raipenta.jpg" alt="Meze Audio RAI Penta"></div>
+          <div class="part-info">
+            <span class="part-cat">IEM</span>
+            <h3 class="part-name">Meze Audio RAI Penta</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://mezeaudio.jp/99-classics/" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/meze99.jpg" alt="Meze Audio 99 Classics"></div>
+          <div class="part-info">
+            <span class="part-cat">Headphones</span>
+            <h3 class="part-name">Meze Audio 99 Classics</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://topping.pro/e2x2-otg/" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/e2x2.jpg" alt="TOPPING E2x2 OTG"></div>
+          <div class="part-info">
+            <span class="part-cat">Audio Interface</span>
+            <h3 class="part-name">TOPPING Professional E2×2 OTG</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://jp.yamaha.com/products/proaudio/live_streaming_gaming/ag/ag03mk2/index.html" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/ag03mk2.jpg" alt="Yamaha AG03MK2"></div>
+          <div class="part-info">
+            <span class="part-cat">Live Streaming Mixer</span>
+            <h3 class="part-name">YAMAHA AG03MK2</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <a href="https://jp.yamaha.com/products/audio_visual/av_receivers_amps/rx-v6a/index.html" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/rxv6a.jpg" alt="Yamaha RX-V6A"></div>
+          <div class="part-info">
+            <span class="part-cat">AV Receiver</span>
+            <h3 class="part-name">YAMAHA RX-V6A</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Desk Accessory (★ 反映完了) -->
+  <div class="pop-overlay" id="modal-desk">
+    <div class="pop-modal">
+      <div class="pop-header">
+        <div>
+          <span class="badge">Workspace</span>
+          <h2 class="pop-title">Desk Accessories</h2>
+        </div>
+        <button type="button" class="pop-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="parts-grid">
+        <!-- WALLHACK SP-004 -->
+        <a href="https://wallhack.com/ja-jp/products/sp-004-white" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/sp004.jpg" alt="WALLHACK SP-004"></div>
+          <div class="part-info">
+            <span class="part-cat">Glass Mousepad</span>
+            <h3 class="part-name">WALLHACK SP-004</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- DA112 Monitor Arm -->
+        <a href="https://kaiteki-work.com/products/detail.php?product_id=47" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/da112.jpg" alt="DA112 Monitor Arm"></div>
+          <div class="part-info">
+            <span class="part-cat">Monitor Arm</span>
+            <h3 class="part-name">DA112 Monitor Arm</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- FIFINE BM88 -->
+        <a href="https://fifinemicrophone.com/products/fifine-bm88-low-profile-mic-arm" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/bm88.jpg" alt="FIFINE BM88"></div>
+          <div class="part-info">
+            <span class="part-cat">Mic Arm</span>
+            <h3 class="part-name">FIFINE BM88 Low-profile Mic Arm Stand</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- KEEBMAT -->
+        <a href="https://keebmat.com/?srsltid=AfmBOooFgw2VbiY2QXf2kJqdLIKfKM8unsnO_RffbjnjHZDhv4KNeoaE#" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/keebmat.jpg" alt="KEEBMAT"></div>
+          <div class="part-info">
+            <span class="part-cat">Keebmat</span>
+            <h3 class="part-name">KEEBMAT™ Premium Felt Edition (Medium Gray / 65%)</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Chair (★ 反映完了) -->
+  <div class="pop-overlay" id="modal-chair">
+    <div class="pop-modal">
+      <div class="pop-header">
+        <div>
+          <span class="badge">Ergonomics</span>
+          <h2 class="pop-title">Chair & Comfort</h2>
+        </div>
+        <button type="button" class="pop-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="parts-grid">
+        <!-- Gesture -->
+        <a href="https://jp.steelcase.com/products/gesture?srsltid=AfmBOorG_up-TpJA0FtoGDY_ogYuJFs9LwS-kRJtRuTBRwDwZ9KDwK6M&variant=43617303953575" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/gesture.jpg" alt="Steelcase Gesture"></div>
+          <div class="part-info">
+            <span class="part-cat">Ergonomic Chair</span>
+            <h3 class="part-name">Steelcase Gesture</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Wish List (★ 反映完了) -->
+  <div class="pop-overlay" id="modal-wishlist">
+    <div class="pop-modal">
+      <div class="pop-header">
+        <div>
+          <span class="badge">Next Target</span>
+          <h2 class="pop-title">Wish List</h2>
+        </div>
+        <button type="button" class="pop-close" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="parts-grid">
+        <!-- NINX NX60OG -->
+        <a href="https://hypeshop.jp/collections/pcba-1/products/ninx-studio-nx60og" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/nx60og.jpg" alt="NINX NX60OG"></div>
+          <div class="part-info">
+            <span class="part-cat">Keyboard Kit</span>
+            <h3 class="part-name">NINX NX60OG</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- TOFU60 3.0 -->
+        <a href="https://kbdfans.cn/ja/products/tofu60-3-0" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/tofu60.jpg" alt="TOFU60 3.0"></div>
+          <div class="part-info">
+            <span class="part-cat">Keyboard Case</span>
+            <h3 class="part-name">TOFU60 3.0 HHKB Top & Bottom Case</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- Universal Audio SD-1 -->
+        <a href="https://www.amazon.co.jp/Universal-Audio-SD-1-%E3%83%80%E3%82%A4%E3%83%8A%E3%83%9F%E3%83%83%E3%82%AF%E3%83%9E%E3%82%A4%E3%82%AF-%E3%83%AD%E3%83%95%E3%82%A9%E3%83%B3/dp/B0B8VGY3M7" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/sd1.jpg" alt="Universal Audio SD-1"></div>
+          <div class="part-info">
+            <span class="part-cat">Microphone</span>
+            <h3 class="part-name">Universal Audio SD-1</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- Kali Audio LP-6 V2 -->
+        <a href="https://www.amazon.co.jp/Kali-Audio-White-%E3%83%91%E3%83%AF%E3%83%BC%E3%83%89%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%BC%E3%82%B9%E3%83%94%E3%83%BC%E3%82%AB%E3%83%BC-6-5%E3%82%A4%E3%83%B3%E3%83%81%E3%82%A6%E3%83%BC%E3%83%8F%E3%83%BC/dp/B0HMVPMJP1/ref=ast_sto_dp_puis?ufe=app_do%3Aamzn1.fos.f851e75d-a860-4774-84a1-525c65264f29" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/lp6v2.jpg" alt="Kali Audio LP-6 V2"></div>
+          <div class="part-info">
+            <span class="part-cat">Studio Monitor</span>
+            <h3 class="part-name">Kali Audio LP-6 V2 (White)</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- ATH-R70xa -->
+        <a href="https://www.audio-technica.co.jp/product/ATH-R70xa" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/r70xa.jpg" alt="ATH-R70xa"></div>
+          <div class="part-info">
+            <span class="part-cat">Headphones</span>
+            <h3 class="part-name">audio-technica ATH-R70xa</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- HomePod mini 2 -->
+        <a href="https://www.apple.com/jp/homepod-mini/" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/homepodmini.jpg" alt="HomePod mini 2"></div>
+          <div class="part-info">
+            <span class="part-cat">Smart Speaker</span>
+            <h3 class="part-name">Apple HomePod mini 2</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- Aqara Hub M3 -->
+        <a href="https://www.aqara.com/jp/product/hub-m3/" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/hubm3.jpg" alt="Aqara Hub M3"></div>
+          <div class="part-info">
+            <span class="part-cat">Smart Hub</span>
+            <h3 class="part-name">Aqara Hub M3</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+        <!-- IKEA GRILLPLATS -->
+        <a href="https://www.ikea.com/jp/ja/p/grillplats-plug-smart-10624743" target="_blank" rel="noopener noreferrer" class="part-item">
+          <div class="part-thumb"><img src="images/grillplats.jpg" alt="IKEA GRILLPLATS"></div>
+          <div class="part-info">
+            <span class="part-cat">Smart Plug</span>
+            <h3 class="part-name">IKEA GRILLPLATS スマートプラグ</h3>
+            <span class="part-arrow">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D Touch ポップアップ開閉スクリプト -->
+  <script>
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.cat-btn');
+      if (btn) {
+        const targetId = btn.getAttribute('data-target');
+        const modal = document.getElementById(targetId);
+        if (modal) {
+          modal.classList.add('is-active');
+          document.body.style.overflow = 'hidden';
+        }
+        return;
+      }
+
+      const closeBtn = e.target.closest('.pop-close');
+      if (closeBtn) {
+        const modal = closeBtn.closest('.pop-overlay');
+        if (modal) {
+          modal.classList.remove('is-active');
+          document.body.style.overflow = '';
+        }
+        return;
+      }
+
+      if (e.target.classList.contains('pop-overlay')) {
+        e.target.classList.remove('is-active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.pop-overlay.is-active').forEach(function(m) {
+          m.classList.remove('is-active');
+        });
+        document.body.style.overflow = '';
+      }
+    });
+
+
+  // --- 写真ギャラリー ライトボックス拡大機能 ---
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  // 写真クリックで拡大
+  document.querySelectorAll('.photo-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // 背景 または 「×」ボタンクリックで閉じる
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.closest('.lightbox-close')) {
+        lightbox.classList.remove('is-active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  // Escキー対応
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.pop-overlay.is-active').forEach(function(m) {
+        m.classList.remove('is-active');
+      });
+      if (lightbox && lightbox.classList.contains('is-active')) {
+        lightbox.classList.remove('is-active');
+      }
+      document.body.style.overflow = '';
+    }
+  });
+  </script>
+
+</body>
+</html>
