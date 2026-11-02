@@ -55,43 +55,56 @@
     </section>
 
     <!-- 4. Gear カテゴリボタン一覧カード (全幅) -->
-    <section class="card categories-card">
-      <div class="card-header">
-        <span class="badge">Desk Setup & Gear</span>
-        <span class="card-subtitle">ボタンをタップして一覧を表示</span>
-      </div>
-      
-      <div class="category-buttons-grid">
-        <button type="button" class="cat-btn" data-target="modal-pc">
-          <span class="cat-icon">🖥️</span>
-          <span class="cat-label">PC</span>
-        </button>
-        <button type="button" class="cat-btn" data-target="modal-monitor">
-          <span class="cat-icon">🖥</span>
-          <span class="cat-label">Monitor</span>
-        </button>
-        <button type="button" class="cat-btn" data-target="modal-input">
-          <span class="cat-icon">⌨️</span>
-          <span class="cat-label">Input Devices</span>
-        </button>
-        <button type="button" class="cat-btn" data-target="modal-audio">
-          <span class="cat-icon">🎧</span>
-          <span class="cat-label">Audio</span>
-        </button>
-        <button type="button" class="cat-btn" data-target="modal-desk">
-          <span class="cat-icon">🪴</span>
-          <span class="cat-label">Desk Accessory</span>
-        </button>
-        <button type="button" class="cat-btn" data-target="modal-chair">
-          <span class="cat-icon">🪑</span>
-          <span class="cat-label">Chair</span>
-        </button>
-        <button type="button" class="cat-btn" data-target="modal-wishlist">
-          <span class="cat-icon">✨</span>
-          <span class="cat-label">Wish List</span>
-        </button>
-      </div>
-    </section>
+<section class="card categories-card">
+  <div class="card-header">
+    <span class="badge">Desk Setup & Gear</span>
+    <span class="card-subtitle">ボタンをタップして一覧を表示</span>
+  </div>
+  
+  <div class="category-buttons-grid">
+    <!-- PC (線画スタイルに統一) -->
+    <button type="button" class="cat-btn" data-target="modal-pc">
+      <svg class="cat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><rect x="24" y="64" width="128" height="128" rx="8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="88" y1="192" x2="88" y2="224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="48" y1="224" x2="128" y2="224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><rect x="176" y="32" width="56" height="192" rx="8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="176" y1="80" x2="232" y2="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="176" y1="112" x2="232" y2="112" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="204" cy="176" r="12" fill="currentColor"/></svg>
+      <span class="cat-label">PC</span>
+    </button>
+
+    <!-- Monitor -->
+    <button type="button" class="cat-btn" data-target="modal-monitor">
+      <svg class="cat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><rect x="32" y="48" width="192" height="144" rx="16" transform="translate(256 240) rotate(180)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="160" y1="224" x2="96" y2="224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+      <span class="cat-label">Monitor</span>
+    </button>
+
+    <!-- Input Devices -->
+    <button type="button" class="cat-btn" data-target="modal-input">
+      <svg class="cat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><rect x="56" y="24" width="144" height="208" rx="56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="112" x2="128" y2="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="56" y1="112" x2="200" y2="112" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+      <span class="cat-label">Input Devices</span>
+    </button>
+
+    <!-- Audio -->
+    <button type="button" class="cat-btn" data-target="modal-audio">
+      <svg class="cat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><path d="M224,128H192a16,16,0,0,0-16,16v40a16,16,0,0,0,16,16h16a16,16,0,0,0,16-16V128a96,96,0,1,0-192,0v56a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V144a16,16,0,0,0-16-16H32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+      <span class="cat-label">Audio</span>
+    </button>
+
+    <!-- Desk Accessory -->
+    <button type="button" class="cat-btn" data-target="modal-desk">
+      <svg class="cat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><path d="M144.28,111.72c-25.08-41.81,8.36-83.61,79.43-79.43C227.89,103.36,186.09,136.8,144.28,111.72Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M98,114c18.24-30.41-6.08-60.81-57.77-57.77C37.17,107.9,67.57,132.22,98,114Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="56" y1="152" x2="200" y2="152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M184,152l-14.61,65.74a8,8,0,0,1-7.81,6.26H94.42a8,8,0,0,1-7.81-6.26L72,152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="144.28" y1="111.72" x2="104" y2="152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="97.98" y1="113.98" x2="120" y2="136" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+      <span class="cat-label">Desk Accessory</span>
+    </button>
+
+    <!-- Chair -->
+    <button type="button" class="cat-btn" data-target="modal-chair">
+      <svg class="cat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><path d="M72,232h0a24,24,0,0,1,24-24h64a24,24,0,0,1,24,24h0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="168" x2="128" y2="232" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M16,128H40a40,40,0,0,0,40,40h96a40,40,0,0,0,40-40h24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M93.72,24a8,8,0,0,0-7.92,6.87l-13.72,96A8,8,0,0,0,80,136h96a8,8,0,0,0,7.92-9.13l-13.72-96A8,8,0,0,0,162.28,24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+      <span class="cat-label">Chair</span>
+    </button>
+
+    <!-- Wish List -->
+    <button type="button" class="cat-btn" data-target="modal-wishlist">
+      <svg class="cat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="128" x2="96" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="192" x2="112" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polygon points="184 174.54 213.67 192 205.6 159.41 232 137.61 197.35 134.94 184 104 170.65 134.94 136 137.61 162.4 159.41 154.33 192 184 174.54" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
+      <span class="cat-label">Wish List</span>
+    </button>
+  </div>
+</section>
 
     <!-- 5. 日常の写真ギャラリー (全幅) -->
     <section class="card gallery-card">
