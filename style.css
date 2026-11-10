@@ -285,9 +285,15 @@ body::after {
   color: #475569;
 }
 
-/* --- 2. YouTubeカード --- */
+/* --- 2. YouTubeカード (全幅＆動画2本並び) --- */
 .youtube-card {
-  grid-column: span 2;
+  grid-column: span 3;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
 
 .video-container {
@@ -309,9 +315,9 @@ body::after {
   height: 100%;
 }
 
-/* --- 3. ステータスカード --- */
+/* --- 3. ステータスカード (全幅化) --- */
 .status-card {
-  grid-column: span 1;
+  grid-column: span 3;
 }
 
 .pulse-indicator {
@@ -383,7 +389,6 @@ body::after {
   pointer-events: none;
 }
 
-/* ボタンホバー演出 */
 .cat-btn:hover {
   background: radial-gradient(
     ellipse at 50% 50%,
@@ -403,18 +408,18 @@ body::after {
   transform: scale(0.95);
 }
 
-/* ★ インラインSVGアイコンのスタイル（Phosphor Icons 完全対応） */
+/* インラインSVGアイコンのスタイル（Phosphor Icons 完全対応） */
 .cat-icon {
   width: 26px;
   height: 26px;
-  color: #475569; /* 通常時のアイコン線の色（上品なスレートグレー） */
+  color: #475569;
   display: block;
   flex-shrink: 0;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
-/* ボタンホバー時：アイコンを鮮やかなブルーに変色させ、わずかに浮かせて発光 */
+/* ボタンホバー時に青色へ変色・発光 */
 .cat-btn:hover .cat-icon {
   color: #1d4ed8;
   transform: translateY(-2px) scale(1.08);
@@ -429,7 +434,6 @@ body::after {
   transition: color 0.2s ease;
 }
 
-/* ボタンホバー時にテキスト色もブルーに連動 */
 .cat-btn:hover .cat-label {
   color: #1d4ed8;
 }
@@ -888,6 +892,12 @@ body::after {
   .gallery-card,
   .links-card {
     grid-column: span 1;
+  }
+
+  /* スマホでは動画を縦に1本ずつ並べる */
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .profile-card {
